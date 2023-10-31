@@ -1,0 +1,18 @@
+Pure Datasets Names:
+applictions state(clicked-active..).csv
+Copy of job_and_app_movement.csv
+jobs_details_data.csv
+talent prefrences_2.csv
+talent_certificate.csv
+talent_education.csv
+talent_skills.csv
+techincal badges .csv
+
+
+AfterPreprocessing Datasets Names:
+FinalTable.csv
+Application_Score.csv
+final_arabic_records.csv
+job_preference_aggregated.csv
+skills_aggregate.csv
+updated_job_pref.csv
