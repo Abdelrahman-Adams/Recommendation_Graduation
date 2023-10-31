@@ -1,0 +1,6 @@
+FinalTable.ipynb:
+Aggregate all three table in one single table
+
+Final_English_Records.ipynb
+Replace Arabic Records from job_pref to English Records from final_arabic_records
+
