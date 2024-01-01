@@ -1,0 +1,5 @@
+1- We apply Keybert on another dataset to see results
+
+2- We apply Keybert on our final processed dataset it's name "Merged_data_info_requirements"
+
+3- we named output "recommendation_data.csv"
