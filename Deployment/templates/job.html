@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Similarities</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1076fc; /* Background color */
+            margin: 0;
+            padding: 0;
+            color: white; /* Text color */
+        }
+    
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .text-section {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    
+        .label-box {
+            background-color: #0c5ea8; /* Box background color */
+            padding: 10px; /* Padding for the box */
+            border-radius: 5px; /* Rounded corners */
+            margin-bottom: 10px; /* Adjusted margin for spacing */
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: white; /* Label text color */
+        }
+    
+        .non-editable-input {
+            width: 100%;
+            padding: 20px; /* Increased padding for more height */
+            box-sizing: border-box;
+            border: 5px solid #ccc;
+            border-radius: 5px;
+            line-height: 10; /* Adjusted line height for increased height */
+            color: #555; /* Text color for non-editable input */
+            background-color: #f1f1f1; /* Background color for non-editable input */
+            display: inline-block; /* Display as inline-block to limit width */
+        }
+    
+        .back-button {
+            background-color: #0c5ea8; /* Updated button background color */
+            color: white;
+            padding: 2%; /* Equal padding from all sides */
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 10px; /* Adjusted margin to move the button to the top */
+            margin-right: 10px; /* Margin from the right side */
+            margin-left: 10px; /* Margin from the left side */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+        }
+    
+        .back-button:hover {
+            background-color: #0a4f7e; /* Adjusted color on hover */
+        }
+    
+        /* Additional Styles for Checkbox */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+    
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            cursor: pointer;
+            color: white; /* Label text color */
+        }
+    
+        .custom-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            border: 2px solid white;
+            outline: none;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+    
+        .custom-checkbox:checked {
+            background-color: #0c5ea8;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="back-button">&#9664; Back</a>
+   
+    <div class="container">
+        <div class="text-section">
+            <div class="label-box">
+                <label for="similarJobs">Top 3 Results</label>
+            </div>
+            {% for index, neighbor in neighbors.iterrows() %}
+            <div class="label-box">
+                <label for="similarJobs">Recommendation Number {{ loop.index }}:</label>
+            </div>
+            
+            <div class="non-editable-input" id="similarJobs"> 
+                <ul>
+                    
+                      <li>
+                        <p>Most similar skills: {{ neighbor['js_skills'] }}</p>
+                        <p>Recommended Job Skills: {{ neighbor['job_skills'] }}</p>
+                        <p>Similar Job titles that suits you: {{ neighbor['job_titles'] }}</p>
+                      </li>
+                    
+                  </ul>
+        </div>
+            {% endfor %}
+        </div>
+
+  
+        <div class="label-box">
+            <label for="jobSatisfaction">Job Seekers</label>
+            <div class="radio-container">
+                <label class="radio-label" for="satisfiedRadio">
+                    <input type="radio" id="satisfiedRadio" name="satisfaction" class="custom-radio">
+                    Satisfied
+                </label>
+                <label class="radio-label" for="notSatisfiedRadio">
+                    <input type="radio" id="notSatisfiedRadio" name="satisfaction" class="custom-radio">
+                    Not Satisfied
+                </label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
