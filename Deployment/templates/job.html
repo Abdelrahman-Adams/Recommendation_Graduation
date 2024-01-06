@@ -5,85 +5,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Similarities</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #1076fc; /* Background color */
+        :root {
+            --main-color: #1076fc;
+            --secondary-gradient-color: #0000007a;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            color: white; /* Text color */
         }
-    
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--main-color);
+            min-height: 100vh;
+        }
+
         .container {
-            max-width: 800px;
-            margin: 50px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding-inline: 150px;
+            margin-inline: auto;
         }
-    
+
+        .result-title {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .result-title label {
+            color: white;
+            font-size: 40px;
+            display: unset;
+            font-weight: bold;
+            padding-inline: 15px;
+            padding-bottom: 5px;
+            border-bottom: 3px solid #E91E63;
+        }
+
         .text-section {
             margin-bottom: 20px;
-            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
-    
-        .label-box {
-            background-color: #0c5ea8; /* Box background color */
-            padding: 10px; /* Padding for the box */
-            border-radius: 5px; /* Rounded corners */
-            margin-bottom: 10px; /* Adjusted margin for spacing */
+
+        .recommendation-count-wrapper label {
+            background-color: transparent;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: white;
         }
-    
-        label {
-            display: block;
+
+        .recommendation-count-wrapper {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            padding: 10px 15px;
+            transform: translate(-50%, -50%);
+            background: rgb(233 30 99 / 72%);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(6.4px);
+            -webkit-backdrop-filter: blur(7.4px);
+            border: 1px solid rgba(22, 128, 147, 0.3);
+        }
+
+        .non-editable-input>ul {
+            list-style: none;
+        }
+
+        .non-editable-input>ul>li span {
+            text-transform: capitalize;
+            font-weight: bold;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--main-color);
+        }
+
+        .non-editable-input>ul>li:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        /* .non-editable-input>ul >  li:not(:last-child) {
             margin-bottom: 10px;
-            color: white; /* Label text color */
+        } */
+        .non-editable-input>ul ul {
+            padding-left: 10px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
-    
+
+        .non-editable-input>ul ul li {
+            list-style: none;
+            background-color: var(--main-color);
+            padding: 5px 8px;
+            color: #FFF;
+            border-radius: 6px;
+        }
+
         .non-editable-input {
-            width: 100%;
-            padding: 20px; /* Increased padding for more height */
+            position: relative;
+            padding: 25px 20px;
             box-sizing: border-box;
             border: 5px solid #ccc;
             border-radius: 5px;
-            line-height: 10; /* Adjusted line height for increased height */
-            color: #555; /* Text color for non-editable input */
-            background-color: #f1f1f1; /* Background color for non-editable input */
-            display: inline-block; /* Display as inline-block to limit width */
+            color: #555;
+            background-color: #f1f1f1;
+            display: inline-block;
         }
-    
+
         .back-button {
-            background-color: #0c5ea8; /* Updated button background color */
+            background-color: #E91E63;
+            transition: 0.3s background-color;
+            border-radius: 0 4px 4px 0;
+            text-align: center;
+            z-index: 10000;
+            display: block;
+            width: fit-content;
+            margin-bottom: 10px;
+            padding: 5px 10px;
             color: white;
-            padding: 2%; /* Equal padding from all sides */
             text-decoration: none;
             border: none;
             cursor: pointer;
             font-size: 20px;
-            margin-top: 10px; /* Adjusted margin to move the button to the top */
-            margin-right: 10px; /* Margin from the right side */
-            margin-left: 10px; /* Margin from the left side */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-    
+
+        .feedback {
+            position: relative;
+            padding: 15px;
+            margin-top: 10px;
+            background-color: white;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .feedback .feedback-title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateY(-50%);
+            border-radius: 8px;
+            background-color: #0a4f7e;
+            color: white;
+            padding: 5px 10px;
+        }
+
+        .feedback .radio-label {
+            display: block;
+            width: fit-content;
+        }
+
+        .feedback .radio-container {
+            width: fit-content;
+            margin-inline: auto;
+        }
+
         .back-button:hover {
-            background-color: #0a4f7e; /* Adjusted color on hover */
+            background-color: #0a4f7e;
+            /* Adjusted color on hover */
         }
-    
+
         /* Additional Styles for Checkbox */
         .checkbox-container {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }
-    
+
         .checkbox-label {
             display: flex;
             align-items: center;
             margin-right: 20px;
             cursor: pointer;
-            color: white; /* Label text color */
+            color: white;
+            /* Label text color */
         }
-    
+
         .custom-checkbox {
             appearance: none;
             width: 20px;
@@ -94,11 +197,10 @@
             cursor: pointer;
             margin-right: 5px;
         }
-    
+
         .custom-checkbox:checked {
             background-color: #0c5ea8;
         }
-
     </style>
 </head>
 <body>
@@ -106,31 +208,61 @@
    
     <div class="container">
         <div class="text-section">
-            <div class="label-box">
+            <div class="result-title">
                 <label for="similarJobs">Top 3 Results</label>
             </div>
             {% for index, neighbor in neighbors.iterrows() %}
-            <div class="label-box">
-                <label for="similarJobs">Recommendation Number {{ loop.index }}:</label>
-            </div>
-            
+
             <div class="non-editable-input" id="similarJobs"> 
+                <div class="recommendation-count-wrapper">
+                    <label for="similarJobs">Recommendation Number {{ loop.index }}</label>
+                </div>
                 <ul>
-                    
+
                       <li>
-                        <p>Most similar skills: {{ neighbor['js_skills'] }}</p>
-                        <p>Recommended Job Skills: {{ neighbor['job_skills'] }}</p>
-                        <p>Similar Job titles that suits you: {{ neighbor['job_titles'] }}</p>
+                        <span> 
+                            Most similar Job seeker skills: 
+                        </span>
+                        <ul> 
+                            
+                            {% for neighbor in  neighbor['js_skills'].split(',') %}
+                            <li>{{ neighbor }}</li>
+                            {% endfor %}
+                        </ul>
                       </li>
-                    
+                      <li>
+                        <span>
+                        Recommended Job Requirement Skills:
+                        </span>
+                        <ul> 
+                            
+                            {% for jskill in  neighbor['job_skills'].split(',') %}
+                            <li>{{ jskill }}</li>
+                            {% endfor %}
+                        </ul>
+                      </li>
+                      <li> 
+                        <span>
+                        Recommended Job Titles:
+                        </span>
+                        <ul> 
+                            
+                            {% for jtitle in  neighbor['job_titles'].split(',') %}
+                            <li>{{ jtitle }}</li>
+                            {% endfor %}
+                        </ul>
+                      </li>
+                        
                   </ul>
         </div>
             {% endfor %}
         </div>
 
   
-        <div class="label-box">
-            <label for="jobSatisfaction">Job Seekers</label>
+        <div class="feedback">
+            <span class="feedback-title">
+                Give your feedback
+            </span>
             <div class="radio-container">
                 <label class="radio-label" for="satisfiedRadio">
                     <input type="radio" id="satisfiedRadio" name="satisfaction" class="custom-radio">

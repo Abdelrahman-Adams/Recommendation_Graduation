@@ -40,8 +40,8 @@ def enhanceResults(neighbors, skills):
         text = text.replace('•', '  *')
         return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
     
-    # Use your Key from here https://makersuite.google.com/app/apikey
-    api_key=""
+    # Use Key
+    api_key="AIzaSyDHBA7bUMopJVB6knn96hQDCgmTORVMl_k"
     genai.configure(api_key=api_key)
     
     model = genai.GenerativeModel('gemini-pro')
